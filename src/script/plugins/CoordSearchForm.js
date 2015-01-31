@@ -28,13 +28,13 @@ gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
     /** private: property[iconCls] */
     iconCls: "ga-icon-coordsearchform",
     /** private: property[marketIconFile] */
-    marketIconFile: 'bluepin.png',
+//    marketIconFile: 'bluepin.png',
     /** private: property[imageLocation] */
-    imageLocation: '/vendor/gxp/src/theme/img/ga/',
+//    imageLocation: '/vendor/gxp/src/theme/img/ga/',
     /** private: property[iconWidth] */
-    iconWidth: 32,
+//    iconWidth: 32,
     /** private: property[iconHeight] */
-    iconHeight: 32,
+//    iconHeight: 32,
     /**
      * api: method[addActions]
      */
