@@ -1,0 +1,4 @@
+/* gxp_zoom */
+.x-btn .ga-icon-coordsearchform, .x-tree-node .ga-icon-coordsearchform {
+    background-image: url(img/ga/map_pin.png);
+}
