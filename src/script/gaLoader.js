@@ -1,7 +1,11 @@
 (function() {
 
     var jsfiles = new Array(
-        "plugins/CoordSearchForm.js"
+        "override-geoext.js",
+        "plugins/CoordSearchForm.js",
+        "plugins/ActiveThemesPanel.js",
+        "plugins/LayerNodeContextMenu.js",
+        "plugins/LayerNodeMenuItem.js"
     );
     
     var scripts = document.getElementsByTagName("script");
