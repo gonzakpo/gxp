@@ -1,11 +1,18 @@
 (function() {
 
     var jsfiles = new Array(
+        "override-openlayers.js",
+        "override-ext.js",
         "override-geoext.js",
+        "widgets/StylesDialog.js",
+        "widgets/VectorStylesDialog.js",
+        "widgets/StyleFeature.js",
         "plugins/CoordSearchForm.js",
         "plugins/ActiveThemesPanel.js",
         "plugins/LayerNodeContextMenu.js",
-        "plugins/LayerNodeMenuItem.js"
+        "plugins/LayerNodeMenuItem.js",
+        "plugins/VectorStyleWriter.js",
+        "ColorManager.js"
     );
     
     var scripts = document.getElementsByTagName("script");

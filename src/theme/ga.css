@@ -2,3 +2,10 @@
 .x-btn .ga-icon-coordsearchform, .x-tree-node .ga-icon-coordsearchform {
     background-image: url(img/ga/map_pin.png);
 }
+/**
+ * StyleFeature
+ */
+.olEditorControlEditorPanel .olControlStyleFeatureItemActive,
+.olEditorControlEditorPanel .olControlStyleFeatureItemInactive {
+    background-image: url("img/silk/palette.png");
+}
