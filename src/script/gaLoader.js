@@ -12,6 +12,7 @@
         "plugins/LayerNodeContextMenu.js",
         "plugins/LayerNodeMenuItem.js",
         "plugins/VectorStyleWriter.js",
+        "plugins/ga/GeoServerStyleWriter.js",
         "ColorManager.js"
     );
     

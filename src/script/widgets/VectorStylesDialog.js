@@ -549,7 +549,8 @@ gxp.VectorStylesDialog.createVectorStylerConfig = function (layerRecord) {
         },
         plugins: [
             {
-                ptype: "gxp_vectorstylewriter"
+                ptype: "ga_geoserverstylewriter",
+                baseUrl: "/capa/rest/?url="
             }
         ]
     };
