@@ -2,6 +2,9 @@
 .x-btn .ga-icon-coordsearchform, .x-tree-node .ga-icon-coordsearchform {
     background-image: url(img/ga/map_pin.png);
 }
+.x-btn .ga-icon-coordpointform, .x-tree-node .ga-icon-coordpointform {
+    background-image: url(img/ga/map_pin_point.png);
+}
 /**
  * StyleFeature
  */

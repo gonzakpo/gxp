@@ -8,7 +8,7 @@
 
 /** api: (define)
  *  module = gxp.plugins
- *  class = CoordSearchForm
+ *  class = CoordPointForm
  */
 
 /** api: (extends)
@@ -17,34 +17,38 @@
 Ext.namespace("gxp.plugins");
 
 /** api: constructor
- *  .. class:: CoordSearchForm(config)
+ *  .. class:: CoordPointForm(config)
  *
- *    Plugin for adding a new group on layer tree.
+ *    Plugin for adding point by coord to layer.
  */
-gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
-    
+gxp.plugins.CoordPointForm = Ext.extend(gxp.plugins.Tool, {
     /** api: ptype = gxp_addgroup */
-    ptype: "ga_coordsearchform",
+    ptype: "ga_coordpointform",
     /** private: property[iconCls] */
-    iconCls: "ga-icon-coordsearchform",
-    /** private: property[marketIconFile] */
-//    marketIconFile: 'bluepin.png',
-    /** private: property[imageLocation] */
-//    imageLocation: '/vendor/gxp/src/theme/img/ga/',
-    /** private: property[iconWidth] */
-//    iconWidth: 32,
-    /** private: property[iconHeight] */
-//    iconHeight: 32,
-    /** api: config[coordSearchFormTooltip]
+    iconCls: "ga-icon-coordpointform",
+    
+    /** api: config[pointInLayerText]
+     *  ``String``
+     *  Text for coord point in menu item (i18n).
+     */
+    pointInLayerText: "Dibujar punto según coordenadas",
+    
+    /** api: config[pointInLayerTooltip]
      *  ``String``
      *  Text for zoom in action tooltip (i18n).
      */
-    coordSearchFormTooltip: "Buscar coordenadas",
+    pointInLayerTooltip: "Dibujar punto según coordenadas",
+
+    /** api: config[layerDrawPoint]
+     *  draw point.
+     */
+
     /**
      * api: method[addActions]
      */
     addOutput: function() {
         var map = this.target.mapPanel.map;
+        var layerDrawPoint = this.layerDrawPoint;
         CSForm = function(){
             var csformWindow, csformForm;
             return{
@@ -75,7 +79,7 @@ gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
                     });
 
                     csformWindow = new Ext.Window({
-                        title: 'Buscar',
+                        title: 'Dibujar punto según coordenadas',
                         width: 270,
                         height: 170,
                         x: 0,
@@ -85,11 +89,10 @@ gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
                         closeAction: 'hide',
                         bodyStyle: 'padding:5px;',
                         buttonAlign: 'center',
-//                        style: "float:left;",
                         items: csformForm
                     });
 
-                    csformWindow.addButton('Buscar', CSForm.submitForm, CSForm);
+                    csformWindow.addButton('Dibujar punto', CSForm.submitForm, CSForm);
 
                     csformWindow.on('show', function(){
                         var f = csformForm.items.item(0);
@@ -103,42 +106,22 @@ gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
                     lon = values['lon'];
                     lat = values['lat'];
                     if(lon.match(/^[+-]?\d+(\.\d+)?$/) && lat.match(/^[+-]?\d+(\.\d+)?$/)) {
-                        // search marker layer by name
-                        var markerLayer = map.getLayersByName("layer_markers");
-                        // if marker layer found, remove existing markers (if enabled)
-                        if (markerLayer[0]) {
-//                            if (markerLayer[0].getVisibility()) {
-//                                markerLayer[0].setVisibility(false);
-//                            }
-                            markerLayer[0].clearMarkers();
-                            //map.removeLayer(markerLayer[0]);
-                        }
+                        // point marker layer by name
+                        var point = new OpenLayers.Geometry.Point(lon, lat);
+                        layerDrawPoint.drawFeature(point);
                         var zoom = map.getZoom();
                         var position = new OpenLayers.LonLat(lon, lat);
                         map.setCenter(position, zoom);
-                        // if marker layer not found, create
-                        if (!markerLayer[0]) {
-                            var markerLayers = new OpenLayers.Layer.Markers("layer_markers");
-                            map.addLayer(markerLayers);
-                            var markerLayer = map.getLayersByName("layer_markers");
-                        }
-                        // set (specific) marker in marker layer
-//                        var size = new OpenLayers.Size(this.iconWidth, this.iconHeight);
-//			var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-//                        var icon = new OpenLayers.Icon(this.imageLocation+this.iconUrl, size, offset);
-//                        var marker = new OpenLayers.Marker(position, this.imageLocation+this.iconUrl);
-                        var marker = new OpenLayers.Marker(position);
-                        markerLayer[0].addMarker(marker);
-                        markerLayer[0].setVisibility(true);
                     }
                 }
             };
         }();
 
-        var out = gxp.plugins.CoordSearchForm.superclass.addOutput.apply(this, [{
+        var out = gxp.plugins.CoordPointForm.superclass.addOutput.apply(this, [{
+            menuText: this.pointInLayerText,
             iconCls: this.iconCls,
+            tooltip: this.pointInLayerTooltip,
             disabled: false,
-            tooltip: this.coordSearchFormTooltip,
             handler: function() {
                 CSForm.init();
             },
@@ -149,4 +132,4 @@ gxp.plugins.CoordSearchForm = Ext.extend(gxp.plugins.Tool, {
     }
         
 });
-Ext.preg(gxp.plugins.CoordSearchForm.prototype.ptype, gxp.plugins.CoordSearchForm);
+Ext.preg(gxp.plugins.CoordPointForm.prototype.ptype, gxp.plugins.CoordPointForm);

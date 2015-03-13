@@ -8,6 +8,7 @@
         "widgets/VectorStylesDialog.js",
         "widgets/StyleFeature.js",
         "plugins/CoordSearchForm.js",
+        "plugins/CoordPointForm.js",
         "plugins/ActiveThemesPanel.js",
         "plugins/LayerNodeContextMenu.js",
         "plugins/LayerNodeMenuItem.js",
